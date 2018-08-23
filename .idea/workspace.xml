@@ -5,7 +5,10 @@
     <bookmark url="file://$PROJECT_DIR$/levelSaving.js" line="105" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7aed5a80-81ac-4495-9b18-9c8dae06ea17" name="Default" comment="" />
+    <list default="true" id="7aed5a80-81ac-4495-9b18-9c8dae06ea17" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -39,11 +42,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="levelSaving.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="levelSaving.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/levelSaving.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="88">
               <caret line="62" column="34" selection-start-line="62" selection-start-column="28" selection-end-line="62" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor>
+                <caret column="49" selection-start-column="49" selection-end-column="49" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -87,6 +102,9 @@
       <find>addgen</find>
     </findStrings>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -96,6 +114,7 @@
         <option value="$PROJECT_DIR$/block.js" />
         <option value="$PROJECT_DIR$/simpleChain.js" />
         <option value="$PROJECT_DIR$/levelSaving.js" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -120,6 +139,7 @@
     <option name="width" value="1440" />
     <option name="height" value="875" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -170,25 +190,26 @@
       <option name="presentableId" value="Default" />
       <updated>1534897675452</updated>
       <workItem from="1534897676709" duration="403000" />
-      <workItem from="1534898093142" duration="58329000" />
+      <workItem from="1534898093142" duration="59556000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="58732000" />
+    <option name="totallyTimeSpent" value="59959000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="25" width="1440" height="875" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="3" visible="true" weight="0.23038869" />
+      <window_info active="true" content_ui="combo" id="Project" order="3" visible="true" weight="0.23038869" />
       <window_info anchor="bottom" id="TODO" order="10" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="2" sideWeight="0.50035334" side_tool="true" weight="0.50406504" />
       <window_info anchor="bottom" id="Run" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="3" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="3" />
       <window_info id="npm" order="0" side_tool="true" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="1" sideWeight="0.49964663" visible="true" weight="0.62059623" />
+      <window_info anchor="bottom" id="Terminal" order="1" sideWeight="0.49964663" visible="true" weight="0.6248295" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
       <window_info id="Favorites" order="1" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -317,6 +338,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
           <caret line="62" column="34" selection-start-line="62" selection-start-column="28" selection-end-line="62" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor>
+            <caret column="49" selection-start-column="49" selection-end-column="49" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
