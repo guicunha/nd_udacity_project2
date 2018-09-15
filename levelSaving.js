@@ -5,6 +5,8 @@ var leveldown = require('leveldown');
 const SHA256 = require('crypto-js/sha256');
 const lexint = require('lexicographic-integer-encoding')('hex');
 
+let Block = require('./block');
+
 
 const chainDB = './chaindata';
 const indexDB = './indexdata';
@@ -14,12 +16,35 @@ const idb = levelup(encode(leveldown(indexDB), {keyEncoding: lexint}));
 
 class SaveChain {
 
-    /** TO-DO */
-    static createNewBlock(){}
+    static createNewBlock(body) {
+        let newBlock = new Block(body);
+        return new Promise((resolve) => {
+            resolve(
+                this.getLastBlock().then((data) => {
+                    let lastBlock = data;
+                    newBlock.time = new Date().getTime().toString().slice(0, -3);
+                    newBlock.previousBlockHash = lastBlock.hash;
+                    newBlock.height = lastBlock.height + 1;
+                    newBlock.hash = newBlock.myBashBuilder();
+                    this.addLevelDBData(newBlock.hash, newBlock).then((data) =>{
+                        return data;
+                    });
+                })
+            );
+        });
+    }
 
-    /** TO-DO */
-    static checkGenesis(){}
-
+    static checkGenesis() {
+        return new Promise((resolve) => {
+            return this.getBlockAtPosition(0).then((data) => {
+                if (data.hasOwnProperty('error')) {
+                    resolve({success: false, message: 'Error checking genesis...'});
+                } else {
+                    resolve(data);
+                }
+            });
+        });
+    }
 
 
     static getBlock(key) {
@@ -57,40 +82,34 @@ class SaveChain {
         });
     }
 
-    static getFirstBlock() {
-        return this.getBlockAtPosition(0).then((data) => {
-            if (data.hasOwnProperty('error')) {
-                return this.addGenesisBlock();
-            } else {
-                return data;
-            }
+    static addLevelDBData(key, block) {
+        return new Promise((resolve) => {
+            return db.put(key, JSON.stringify(block), function (err) {
+                if (err) return {success: false, block: block, error_bag: err};
+
+                idb.put(block.height, block.hash), function (error) {
+                    if (error) return {success: false, block: block, error_bag: error};
+                };
+                resolve({success: true, block: block});
+            });
         });
     }
 
 
-    static addLevelDBData(key, block) {
-        db.put(key, JSON.stringify(block), function (err) {
-            if (err) return console.log('Block ' + key + ' submission failed', err);
-            idb.put(block.height, block.hash), function (error) {
-                if (err) return console.log('index creator ' + block.height + ' submission failed', err);
-            }
-        })
-    }
-
-
     static addGenesisBlock() {
-
-        let block = new Block("First block in the chain - Genesis block");
-        block.time = new Date().getTime().toString().slice(0, -3);
-        block.height = 0;
-        block.previousBlockHash = "0000000000000000000000000000000000000000000000000000000000000000";
-        block.hash = SHA256(JSON.stringify(block)).toString();
-
-        this.addLevelDBData(block.hash, block);
-
+        return new Promise((resolve) => {
+            let block = new Block("First block in the chain - Genesis block");
+            block.time = new Date().getTime().toString().slice(0, -3);
+            block.height = 0;
+            block.previousBlockHash = "0000000000000000000000000000000000000000000000000000000000000000";
+            block.hash = SHA256(JSON.stringify(block)).toString();
+            resolve(this.addLevelDBData(block.hash, block).then((firstBlockCreated) => {
+                return firstBlockCreated;
+            }));
+        });
     }
 
-    static getAllBLocks(){
+    static getAllBLocks() {
         let blocks = [];
         return new Promise((resolve) => {
             db.createValueStream({'reverse': false}).on('data', (block) => {
@@ -104,7 +123,6 @@ class SaveChain {
     }
 
     /** TO-DO **/
-    // validate block
     static validateBlock(blockHeight) {
 
         return new Promise((resolve) => {
@@ -144,33 +162,26 @@ class SaveChain {
     static validateChain() {
 
         return new Promise((resolve) => {
-            this.getAllBLocks().then((blocks) =>{
+            this.getAllBLocks().then((blocks) => {
                 Promise.all(blocks).then((data) => {
                     let ar = data.sort(this.compare);
                     let result = {};
                     result.success = [];
                     result.fail = [];
-                    for(let i = 0; i < ar.length -1; i++){
-
+                    for (let i = 0; i < ar.length - 1; i++) {
 
                         var newest = ar[i];
+                        var oldest = ar[i + 1];
 
-                        var oldest = ar[i+1];
-
-
-                        if (newest.previousBlockHash == oldest.hash && newest.height == oldest.height +1){
-                            var retorno = {
-                                'newBLock': newest,
-                                'oldBlock': oldest,
-                                'successo': true
-                            }
+                        if (newest.previousBlockHash == oldest.hash && newest.height == oldest.height + 1) {
+                            let retorno = [
+                                {'newBLock': newest, 'oldBlock': oldest}
+                            ];
                             result.success.push(retorno);
                         } else {
-                            var retorno = {
-                                'newBLock':newest,
-                                'oldBlock': oldest,
-                                'successo': false
-                            }
+                            let retorno = [
+                                {'newBLock': newest, 'oldBlock': oldest}
+                            ];
                             result.fail.push(retorno);
                         }
                     }
@@ -178,39 +189,22 @@ class SaveChain {
                 });
             })
         });
-
     }
 
-    static compare(a,b) {
+    static getBlockChainHeight(){
+        return new Promise((resolve) => {
+            this.getLastBlock().then((data) => {
+                resolve(data.height);
+            });
+        });
+    }
+
+    static compare(a, b) {
         if (a.height > b.height)
             return -1;
         if (a.height < b.height)
             return 1;
         return 0;
-    }
-
-    static checkTwoBlocks(blockA, blockB){
-        console.log(blockA);
-        console.log(blockB);
-    }
-
-
-
-
-    static print(object) {
-        return console.log(JSON.stringify(object, null, 2));
-    }
-
-}
-
-class Block {
-
-    constructor(data) {
-        this.hash = "",
-            this.height = 0,
-            this.body = data,
-            this.time = 0,
-            this.previousBlockHash = ""
     }
 
 }

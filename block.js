@@ -22,10 +22,9 @@ class Block {
     }
 
     validateBlock(previousBlock){
-        let current = this;
         let previous = previousBlock;
 
-        if(this.previousBlockHash == previous.hash){
+        if(this.previousBlockHash == previous.hash && this.height == previous.height){
             return true;
         } else {
             return false;

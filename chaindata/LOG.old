@@ -1,6 +1,0 @@
-2018/08/23-13:23:20.267650 7ffbcbfff700 Recovering log #613
-2018/08/23-13:23:20.267712 7ffbcbfff700 Level-0 table #615: started
-2018/08/23-13:23:20.291155 7ffbcbfff700 Level-0 table #615: 404 bytes OK
-2018/08/23-13:23:20.363703 7ffbcbfff700 Delete type=3 #612
-2018/08/23-13:23:20.363786 7ffbcbfff700 Delete type=0 #613
-2018/08/23-13:23:20.399748 7ffbc9ffb700 Moved #595 to level-1 405 bytes OK: files[ 3 4 0 0 0 0 0 ]
