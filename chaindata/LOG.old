@@ -1,0 +1,6 @@
+2018/09/21-14:37:53.752 2d4c Recovering log #18
+2018/09/21-14:37:53.752 2d4c Level-0 table #20: started
+2018/09/21-14:37:53.761 2d4c Level-0 table #20: 400 bytes OK
+2018/09/21-14:37:53.770 2d4c Delete type=0 #18
+2018/09/21-14:37:53.770 2d4c Delete type=3 #16
+2018/09/21-14:37:53.773 3078 Moved #11 to level-1 388 bytes OK: files[ 3 3 0 0 0 0 0 ]

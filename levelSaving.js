@@ -26,7 +26,7 @@ class SaveChain {
                     newBlock.previousBlockHash = lastBlock.hash;
                     newBlock.height = lastBlock.height + 1;
                     newBlock.hash = newBlock.myBashBuilder();
-                    this.addLevelDBData(newBlock.hash, newBlock).then((data) =>{
+                    return this.addLevelDBData(newBlock.hash, newBlock).then((data) =>{
                         return data;
                     });
                 })
@@ -175,12 +175,12 @@ class SaveChain {
 
                         if (newest.previousBlockHash == oldest.hash && newest.height == oldest.height + 1) {
                             let retorno = [
-                                {'newBLock': newest, 'oldBlock': oldest}
+                                {'newest_block': newest, 'previous_block': oldest}
                             ];
                             result.success.push(retorno);
                         } else {
                             let retorno = [
-                                {'newBLock': newest, 'oldBlock': oldest}
+                                {'newest_block': newest, 'previous_block': oldest}
                             ];
                             result.fail.push(retorno);
                         }
